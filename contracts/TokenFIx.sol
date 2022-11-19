@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: UNLICENSED
 // contracts/TokenExchange.sol
 pragma solidity 0.8.10;
 
@@ -19,9 +20,19 @@ contract TokenFix {
 
     IERC20 public newToken;
 
+    uint private userBalance;
+    
+    uint private allowance;
+
+    event userBalanceEmission(uint balance);
+    event swapAmountEmission(uint swapAmount);
+    event transferData(address destinationAddress);
+    event oldAddress(IERC20 oldTokenAddress);
+    event userAddress(address userAddress);
+
     constructor(address _oldToken, address _newToken) {
-        oldToken = _oldToken;
-        newToken = _newToken;
+        oldToken = IERC20(_oldToken);
+        newToken = IERC20(_newToken);
     }
 
     //@notice this function is to swap old tokens for new tokens at a 1:1 rate (?) 
@@ -32,23 +43,51 @@ contract TokenFix {
             revert('Swap amount exceeds balance');
         }
 
-        IERC20(oldToken).safeTransfer(address.this, swapAmount);
+        emit userBalanceEmission(userBalance);
+        emit swapAmountEmission(swapAmount);
+        emit transferData(address(this));
+        emit oldAddress(oldToken);
+        emit userAddress(msg.sender);
 
-        IERC20(newToken).safeTransfer(msg.sender, swapAmount);
+        IERC20(oldToken).transferFrom(msg.sender, address(this), swapAmount);
+
+        // IERC20(newToken).safeTransfer(msg.sender, swapAmount);
+    }
+
+    function swapDataDump(uint256 swapAmount) public {
+        userBalance = IERC20(oldToken).balanceOf(msg.sender);
+
+        if (userBalance < swapAmount) {
+            revert('Swap amount exceeds balance');
+        }
+
+        emit userBalanceEmission(userBalance);
+        emit swapAmountEmission(swapAmount);
+        emit transferData(address(this));
+        emit oldAddress(oldToken);
+        emit userAddress(msg.sender);
+
+        // IERC20(oldToken).safeTransfer(address(this), swapAmount);
+
+        // IERC20(newToken).safeTransfer(msg.sender, swapAmount);
+    }
+
+    //@notice this function is to swap old tokens for new tokens at a 1:1 rate (?) 
+    function userBalances(uint256 swapAmount) public {
+        userBalance = IERC20(oldToken).balanceOf(msg.sender);
+
+        emit userBalanceEmission(userBalance);
+        emit swapAmountEmission(swapAmount);
+
+        if (userBalance < swapAmount) {
+            revert('Swap amount exceeds balance');
+        }
     }
 
     function approve(address tokenAddress) public {
-        IERC20(tokenAddress).approve(address.this, uint256(-1));
+        // https://ethereum.stackexchange.com/questions/94520/explicit-type-conversion-not-allowed-from-int-const-1-to-uint128
+        allowance = 100000000000000000000000;
+        IERC20(tokenAddress).approve(address(this), allowance);
+        IERC20(tokenAddress).approve(msg.sender, allowance);
     }
-
-    function transfer() external payable {
-        uint256 tokens = msg.value.mul(rate);
-        token.transfer(msg.sender, tokens);
-
-    }
-
-    // Initializer function (replaces constructor)
-
-    // Send tokens back to the sender using predefined exchange rate
-    
 }

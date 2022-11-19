@@ -12,7 +12,7 @@ task('networks', 'Creates network config file', async() => {
 });
 
 const config: HardhatUserConfig = {
-  defaultNetwork: 'arbitrum',
+  defaultNetwork: 'arbitrumgoerli',
   solidity: {
     version: '0.8.10',
     settings: {

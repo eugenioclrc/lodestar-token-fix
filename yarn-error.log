@@ -1,35 +1,41 @@
 Arguments: 
-  /Users/acanino/.nvm/versions/node/v16.15.0/bin/node /Users/acanino/.nvm/versions/node/v16.15.0/bin/yarn install --lock-file
+  /Users/coop/.nvm/versions/node/v14.19.1/bin/node /Users/coop/.yarn/bin/yarn.js install --lock-file
 
 PATH: 
-  /Users/acanino/.nvm/versions/node/v16.15.0/bin:/Users/acanino/.nvm/versions/node/v12.22.12/bin:/Users/acanino/.nvm/versions/node/v16.15.0/bin:/Users/acanino/.nvm/versions/node/v14.19.2/bin:/Users/acanino/.nvm/versions/node/v12.22.12/bin:/Users/acanino/.nvm/versions/node/v16.15.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Users/acanino/.nvm/versions/node/v16.15.0/bin
+  /Users/coop/.yarn/bin:/Users/coop/.config/yarn/global/node_modules/.bin:/Users/coop/.nvm/versions/node/v14.19.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/coop/Library/Python/3.9/bin:/Users/coop/.local/bin:/Users/coop/Library/Python/3.9/bin:/Users/coop/.local/bin
 
 Yarn version: 
-  1.22.18
+  1.22.19
 
 Node version: 
-  16.15.0
+  14.19.1
 
 Platform: 
   darwin x64
 
 Trace: 
   Error: https://registry.yarnpkg.com/openzeppelin: Not found
-      at Request.params.callback [as _callback] (/Users/acanino/.nvm/versions/node/v16.15.0/lib/node_modules/yarn/lib/cli.js:66138:18)
-      at Request.self.callback (/Users/acanino/.nvm/versions/node/v16.15.0/lib/node_modules/yarn/lib/cli.js:140883:22)
-      at Request.emit (node:events:527:28)
-      at Request.<anonymous> (/Users/acanino/.nvm/versions/node/v16.15.0/lib/node_modules/yarn/lib/cli.js:141855:10)
-      at Request.emit (node:events:527:28)
-      at IncomingMessage.<anonymous> (/Users/acanino/.nvm/versions/node/v16.15.0/lib/node_modules/yarn/lib/cli.js:141777:12)
-      at Object.onceWrapper (node:events:641:28)
-      at IncomingMessage.emit (node:events:539:35)
-      at endReadableNT (node:internal/streams/readable:1345:12)
-      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+      at Request.params.callback [as _callback] (/Users/coop/.yarn/lib/cli.js:66145:18)
+      at Request.self.callback (/Users/coop/.yarn/lib/cli.js:140890:22)
+      at Request.emit (events.js:400:28)
+      at Request.<anonymous> (/Users/coop/.yarn/lib/cli.js:141862:10)
+      at Request.emit (events.js:400:28)
+      at IncomingMessage.<anonymous> (/Users/coop/.yarn/lib/cli.js:141784:12)
+      at Object.onceWrapper (events.js:519:28)
+      at IncomingMessage.emit (events.js:412:35)
+      at endReadableNT (internal/streams/readable.js:1334:12)
+      at processTicksAndRejections (internal/process/task_queues.js:82:21)
 
 npm manifest: 
   {
     "dependencies": {
-      "hardhat": "^2.12.2"
+      "@openzeppelin/contracts": "^4.8.0",
+      "@openzeppelin/contracts-upgradeable": "^4.8.0",
+      "@openzeppelin/upgrades": "^2.8.0",
+      "dotenv": "^16.0.3",
+      "hardhat": "^2.12.2",
+      "hardhat-contract-sizer": "^2.6.1",
+      "hardhat-deploy": "^0.11.20"
     },
     "devDependencies": {
       "@nomicfoundation/hardhat-toolbox": "^2.0.0",
