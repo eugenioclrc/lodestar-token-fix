@@ -66,10 +66,6 @@ contract TokenFix {
         emit transferData(address(this));
         emit oldAddress(oldToken);
         emit userAddress(msg.sender);
-
-        // IERC20(oldToken).safeTransfer(address(this), swapAmount);
-
-        // IERC20(newToken).safeTransfer(msg.sender, swapAmount);
     }
 
     //@notice this function is to swap old tokens for new tokens at a 1:1 rate (?) 
