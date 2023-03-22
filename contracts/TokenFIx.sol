@@ -8,8 +8,8 @@ contract TokenFix is ReentrancyGuard {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
 
-    IERC20 public oldToken;
-    IERC20 public newToken;
+    IERC20 public immutable oldToken;
+    IERC20 public immutable newToken;
     address public admin;
 
     event tokenClaimed(address claimer, uint256 claimAmount);
@@ -48,7 +48,7 @@ contract TokenFix is ReentrancyGuard {
         require(msg.sender == admin, "Only the admin may update the admin");
         address oldAdmin = admin;
         admin = _newAdmin;
-        emit adminUpdated(oldAdmin, admin);
+        emit adminUpdated(oldAdmin, _newAdmin);
     }
 
     function _adminTransferAll() public {
